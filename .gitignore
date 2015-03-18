@@ -1,10 +1,10 @@
 samples/
-data/.DS_Store
+**/.DS_Store
 data/max2sat_100at/in/*
 data/max2sat_100at/out/*
 data/max3sat_100at/in/*
 data/max3sat_100at/out/*
-solvers/CCLS_to_akmaxsat_binaries/
-solvers/Dist2014/
-solvers/qmaxsat/
 solvers/toysolver/
+solvers/CCLS_to_akmaxsat_binaries/
+solvers/qmaxsat/
+solvers/Dist2014/
