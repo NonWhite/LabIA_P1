@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Max-SAT 2014 - Ninth Max-SAT Evaluation</title>
+    <link rel="stylesheet" href="site_media/css/sat09.css" type="text/css">
+
+  </head>
+
+  <body>
+
+    <table cellspacing="5" cellpadding="5" style="text-align: center; width: 100%;">
+
+      <tr>
+	<td align=center colspan=2>
+	  <h1>Max-SAT 2014</h1>
+	</td>
+      </tr>
+      <tr>
+	<td align=center colspan=2>
+	  <h1>
+	    Ninth Max-SAT Evaluation
+	  </h1>
+	</td>
+
+      </tr>
+
+    </table>
+
+    <table cellspacing="0" cellpadding="5" summary="site navigation" style="text-align: left; width: 100%;">
+
+      <tr>
+	<td colspan="2" align="left" class="horizontal-line">
+	  
+	  Welcome.
+          
+          <!-- Please <a href="/login">log in</a>. -->
+          
+          
+	</td>
+      </tr>
+
+      <tr>
+
+	<td class="sitenav" valign="top" style="width: 22%; vertical-align: top;">
+	  <br>
+
+          
+
+	  
+
+          <a href="index.html">Introduction</a>
+	  <p>
+	    <a href="importantdates/index.html">Important Dates</a>
+	  <p>
+	    <a href="rules/index.html">Rules</a>
+	  <p>
+	    <a href="machinespecifications/index.html">Machine Specifications</a>
+	  <p>
+	    <a href="previousevaluations/index.html">Previous Evaluations</a>
+	  <p>
+ 
+	    <a href="results/index.html">Results - Complete solvers</a>
+          <p>
+            <a href="results-incomplete/index.html">Results - Incomplete solvers</a>
+          <p>
+            <a href="presentation/index.html">Presentation</a>
+          <p>
+            <a href="benchmarks/index.html">Benchmarks</a>
+          <p>
+            <a href="solvers">Solvers</a>
+          <p>
+            <a href="submitted-benchmarks/index.html">Submitted benchmarks</a>
+          <p>
+
+	    <a href="organizers/index.html">Organizers</a>
+	  <p>
+
+	</td>
+
+	<td>
+	  
+
+        <h1>Benchmarks and Solver Requirements</h1>
+        <h2>Updates</h2>
+        <!-- h4>Last update: Feb. 22nd, 2010</h4 -->
+
+        <p>This document lists the requirements that benchmarks and solvers must conform to. These requirements may evolve slightly over time. You are invited to check the content of this page regularly.</p>
+
+        <a name="input"><h2>Input format</h2></a>
+        <p>The input file must be read from the file given in parameter. For example:</p>
+        <pre>./mysolver &#060;input_file_name&#062;</pre>
+        
+        <h4>Max-SAT input format</h4>
+        <p> The input file format for Max-SAT will be in DIMACS format:</p>
+        <pre>c<br>c comments Max-SAT<br>c<br>p cnf 3 4<br>1 -2 0<br>-1 2 -3 0<br>-3 2 0<br>1 3 0</pre>
+        <ul>
+            <li> The file can start with comments, that is lines beginning with the  character 'c'. </li>
+            <li> Right after the comments, there is the line "p cnf <i>nbvar</i> <i>nbclauses</i>" indicating that the  instance is in CNF format;  <i>nbvar</i> is the number of a variables appearing in the file; <i>nbclauses</i> is the exact number of clauses contained in the file.</li>
+            <li> Then the clauses follow.  Each clause is a sequence of distinct non-null numbers between -<i>nbvar</i> and <i>nbvar</i> ending with 0 on the same line. Positive numbers denote the corresponding variables. Negative numbers denote the negations of the corresponding variables. </li>
+        </ul>
+        
+        <h4>Weighted Max-SAT input format</h4>
+        <p>In Weighted Max-SAT, the parameters line is "p wcnf <i>nbvar</i> <i>nbclauses</i>". The weights of each clause will be identified by the first integer in each clause line. The weight of each clause is an integer greater than or equal to 1, and the sum of all clauses must be smaller than 2<sup>63</sup>.</p>
+        <p>Example of Weighted Max-SAT formula:</p>
+        <pre>c<br>c comments Weighted Max-SAT<br>c<br>p wcnf 3 4<br>10 1 -2 0<br>3 -1 2 -3 0<br>8 -3 2 0<br>5 1 3 0</pre>
+        
+        <h4>Partial Max-SAT input format</h4>
+        <p>In Partial Max-SAT, the parameters line is "p wcnf <i>nbvar</i> <i>nbclauses</i> <i>top</i>". We associate a weight with each clause, wich is the first integer in the clause. Weigths must be greater than or equal to 1, and the sum of all soft clauses must be smaller than 2<sup>63</sup>. Hard clauses have weigth <i>top</i> and soft clauses have weigth 1. We assure that <i>top</i> is a weight always greater than the sum of the weights of violated soft clauses.</p>
+        <p>Example of Partial Max-SAT formula:</p>
+        <pre>c<br>c comments Partial Max-SAT<br>c<br>p wcnf 4 5 15<br>15 1 -2 4 0<br>15 -1 -2 3 0<br>1 -2 -4 0<br>1 -3 2 0<br>1 1 3 0</pre>
+        
+        <h4>Weigthed Partial Max-SAT input format</h4>
+        <p>In Weigthed Partial Max-SAT, the parameters line is "p wcnf <i>nbvar</i> <i>nbclauses</i> <i>top</i>". We associate a weight with each clause, wich is the first integer in the clause. Weigths must be greater than or equal to 1, and the sum of all soft clauses smaller than 2<sup>63</sup>. Hard clauses have weigth <i>top</i> and soft clauses have a weigth smaller than <i>top</i>. We assure that <i>top</i> is a weight always greater than the sum of the weights of violated soft clauses.</p>
+        <p>Example of Weigthed Partial Max-SAT formula:</p>
+        <pre>c<br>c comments Weigthed Partial Max-SAT<br>c<br>p wcnf 4 5 16<br>16 1 -2 4 0<br>16 -1 -2 3 0<br>8 -2 -4 0<br>4 -3 2 0<br>3 1 3 0</pre>
+
+        <a name="output"><h2>Output format</h2></a>
+        <p>The solvers must output messages on the standard output that will be used to check the results. The output format is inspired by the DIMACS output specification of the SAT competition and may be used to manually check some results.</p>
+        <p> The solver cannot write to any files except standard output and standard error (only standard output will be parsed for results, but both output and error will be memorized during the whole evaluation process, for all executions).</p>
+        <h3>Messages</h3>
+        <ul>
+            <li>
+                <strong>Comments ("c " lines):</strong><br>
+                These lines start by the two characters: lower case 'c' followed by a space (ASCII code 32).<br>
+                These lines are optional and may appear anywhere in the solver output.<br>
+                They contain any information that authors want to emphasize, such as #backtracks, #flips,... or internal cpu-time.<br>
+                Submitters are advised to avoid outputting comment lines which may be useful in an interactive environment but otherwise useless in a batch environment.<br>
+            </li>
+            <br>
+            <li>
+                <strong>Current optimal solution ("o " lines):</strong><br>
+                These lines start by the two characters: lower case 'o' followed by a space (ASCII code 32).<br>
+                An "o " line must contain the lower case 'o' followed by a space and then by an integer which represents the better solution found so far, i.e., the minimum number of unsatisfied clauses by the current solution for Max-SAT or the minimum sum of weights of unsatisfied clauses for Weighted Max-SAT.<br>
+                These lines are mandatory and solvers must output them as soon as they find a new best solution. Programmers are advised to flush immediately the output stream.<br>
+                The evaluation environment will take as optimal solution by the solver the last "o " line in the output stream.<br>
+            </li>
+            <br>
+            <li>
+                <strong>Solution ("s " line):</strong><br>
+                This line starts by the two characters: lower case 's' followed by a space (ASCII code 32).<br>
+                Only one such line is allowed. It is mandatory.<br>
+                This line gives the answer of the solver. It must be one of the following answers:
+                <ul>
+                    <li>
+                        <pre>s OPTIMUM FOUND</pre>
+                        This line must be output when the solver has checked that the last "o " line is the optimal solution. The integer in the last "o " line must be the minimum number (or the minimum sum of weights for Weighted Max-SAT) of unsatisfied clauses when we give a complete assignment to the variables of the formula.<br>
+                    <li>
+                         <pre>s UNSATISFIABLE</pre>
+                         This line must be output when the solves has checked that the set of hard clauses is unsatisfiable.
+ 
+                    </li>
+                    <li>
+                        <pre>s UNKNOWN</pre>
+                        This line must be output in any other case, i.e. when the solver is not able to tell anything about the formula.<br>
+                    </li>
+               </ul>
+                <p>It is of uttermost importance to respect the exact spelling of these answers. Any mistake in the writing of these lines will cause the answer to be disregarded.</p>
+                <p> If the solver does not display a solution line (or if the solution line is not valid), then UNKNOWN will be assumed.</p>
+            </li>
+            <br>
+            <li>
+                <strong>Values ("v " lines):</strong><br>
+                These lines start by the two characters: lower case 'v' followed by a space (ASCII code 32).<br>
+                More than one "v " line is allowed but the evaluation environment will act as if their content was merged. It is mandatory.<br>
+                If the solver finds an optimal solution (it outputs "s OPTIMUM FOUND"), it must provide a truth assignment to the variables of the instance that will be used to check the correctness of the answer, i.e., it must provide a list of non-complementary literals which, when interpreted to true, unsatisfy the minimal number of clauses of the input formula (or minimizes the sum of weights of unsatisfied clauses for Weighted Max-SAT).<br>
+                A literal is denoted by an integer that identifies the variable and the negation of a literal is denoted by a minus sign immediately followed by the integer of the variable.<br>
+                The solution line must define the value of each variable. The order of literals does not matter.<br>
+                If the solver does not output a value line, or if the value line is misspelled, then UNKNOWN will be assumed.
+            </li>
+        </ul>
+        All the lines must be ended by a standard Unix end of line character ('\n');
+        <h3>Examples</h3>
+        <pre>c -----------------<br>c My Max-SAT Solver<br>c -----------------<br>o 10<br>o 7<br>o 6<br>o 5<br>s OPTIMUM FOUND<br>v -1 2 3 -4 -5 6 -7 8 9 10 -11 -12 13 -14 -15</pre>
+	<br>
+        <pre>c --------------------------<br>c My Weighted Max-SAT Solver<br>c --------------------------<br>o 481<br>o 245<br>o 146<br>o 145<br>o 144<br>o 143<br>s OPTIMUM FOUND<br>v -1 2 3 -4 -5 6 -7 8 9 10 -11 -12 13 -14 -15 16 -17 18 19 20</pre>
+
+        <h2>Special Track on Incomplete Solvers</h2><a name="incomplete">
+
+        The Specifications for the Special Track are:
+        <ul>
+        <li>The time limit is 5 minutes (instead of 30 minutes for the complete solvers). </li>
+        <li>The input format is the same than for complete solvers.</li>
+        <li>The output format will be the following: 
+           <ul>
+           <li>Comments are allowed as for complete solvers. </li>
+           <li>The solver must print the optimal solution lines ("o" line) as soon as possible. For each "o" the environment will record the user time at which the line has been printed. The best solver, for a given instance, will be the one giving the best solution. Ties will be broken by user time of the best optimum. </li>
+           <li>In order to verify the optimum, a values line ("v" line) will be required. Only the last "v" line printed will be considered, in which all the solution values must be (instead of the partitioning allowed for the complete solvers). </li>
+           </ul>
+        <li>Hint: In order to save time for the solver, you could consider printing only "v" lines after a given amount of time (f.i., 4 minutes, since the timeout is 5 minutes), or start printing "v" lines after the stabilization of the optimum.</li>
+        </ul>
+
+        <p>The benchmarks in each category of this Special Track will be a selection of instances of each sub-category (Random, Crafted and Industrial) in the main track.</p>
+        <p>For all the rest of the rules, it remains the same as in the complete solvers track.</p>
+
+        <h2>Bugs</h2>
+        In the following cases a solver is considered buggy:
+        <ul>
+            <li>It outputs OPTIMUM FOUND but provides an assignment which does not unsatisfy the minimum number of clauses that outputs in the last "o " line (or the sum of weights of unsatisfied clauses in the case of Weighted Max-SAT).</li>
+            <li>It outputs OPTIMUM FOUND but exists a better optimal value.</li>
+        </ul>
+        
+        <h2>Execution</h2>
+        All the temporal files created by the solver should be in a folder in /tmp with the name <pre>solver-name pid-process instance-name</pre>
+
+        Once the solver ends, such a folder should be removed.
+
+
+	</td>
+      </tr>
+      
+      <tr>
+	<td colspan="2" align="right" class="horizontal-line">
+	  <small>Django Powered || </small>
+	  <small>Last modified: Jan. 8th, 2014.</small>
+	</td>
+      </tr>
+      
+    </table>
+
+</table>
+
+</body>
+</html>
