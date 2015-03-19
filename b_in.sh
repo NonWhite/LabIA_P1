@@ -1,3 +1,4 @@
+#!/bin/bash
 # Generating aleatory data
 m=1
 while [ $m -le 80 ]; do

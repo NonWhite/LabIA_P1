@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Eliminando archivos antiguos de entrada"
 rm data/max2sat_100at/in/*
 echo "Eliminando archivos antiguos de salida"

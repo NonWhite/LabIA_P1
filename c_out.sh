@@ -1,3 +1,4 @@
+#!/bin/bash
 # Executing toysolver for data
 path=$(pwd)
 m=1

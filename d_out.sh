@@ -2,6 +2,7 @@
 # Generating aleatory data
 rel=( 10 30 43 60 80 )
 mn=0
+path=$(pwd)
 while [ $mn -le 4 ]; do
 	N=100
 	while [ $N -le 1000 ]; do
@@ -19,12 +20,16 @@ while [ $mn -le 4 ]; do
 			if [ $i -lt 100 ]; then
 				num="0$num"
 			fi
-			name="data/max3sat_mn${rel[$mn]}/in/${at}at_${num}.wcnf"
-			python generator/generator.py $N $M 3 $name
-			#echo "N=$N , M=$M , FILE=$name"
+			infile="data/max3sat_mn${rel[$mn]}/in/${at}at_${num}.wcnf"
+			outfile="data/max3sat_mn${rel[$mn]}/out/${at}at_${num}.txt"
+			if [ -f $outfile ]; then
+				continue
+			fi
+			cd solvers/toysat/
+			./toysat --timeout=60 --maxsat "$path/$infile" > "$path/$outfile"
+			cd $path
 			i=$(($i+1))
 		done
-		echo "N=$N , M=$M"
 		N=$(($N+100))
 	done
 	mn=$(($mn+1))

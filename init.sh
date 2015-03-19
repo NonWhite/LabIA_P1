@@ -1,3 +1,4 @@
+#!/bin/bash
 mkdir data
 
 mkdir data/max3sat_100at/
