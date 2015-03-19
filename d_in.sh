@@ -11,7 +11,7 @@ while [ $mn -le 4 ]; do
 		if [ $N -lt 1000 ]; then
 			at="0$at"
 		fi
-		while [ $i -le 100 ]; do
+		while [ $i -le 10 ]; do
 			num=$i
 			if [ $i -lt 10 ]; then
 				num="0$num"

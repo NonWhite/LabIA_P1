@@ -12,7 +12,7 @@ while [ $mn -le 4 ]; do
 		if [ $N -lt 1000 ]; then
 			at="0$at"
 		fi
-		while [ $i -le 100 ]; do
+		while [ $i -le 10 ]; do
 			num=$i
 			if [ $i -lt 10 ]; then
 				num="0$num"
@@ -26,7 +26,7 @@ while [ $mn -le 4 ]; do
 				continue
 			fi
 			cd solvers/toysat/
-			./toysat --timeout=60 --maxsat "$path/$infile" > "$path/$outfile"
+			./toysat --timeout=1800 --maxsat "$path/$infile" > "$path/$outfile"
 			cd $path
 			i=$(($i+1))
 		done
