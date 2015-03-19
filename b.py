@@ -1,6 +1,7 @@
 import sys
 import os
 import utils
+import time
 from functools import partial
 from multiprocessing.dummy import Pool
 from subprocess import call
@@ -17,7 +18,8 @@ class Turing( Daemon ) :
 		'rel_mn' : utils.frange( 0.1 , 8.0 , 0.1 ) ,
 		'files_per_conf' : 100 ,
 		'call_generator' : 'python generator/generator.py' ,
-		'call_maxsatsolver' : './toysat'
+		'call_maxsatsolver' : 'sh maxsatsolver.sh' ,
+		'maxsatsolver_timeout' : 1800
 	}
 	
 	def initialize( self ) :
@@ -37,7 +39,7 @@ class Turing( Daemon ) :
 				self.initializeArchivo( f , ext )
 
 	def generateInFiles( self ) :
-		# TODO: Agregar timer de duracion de generacion de datos
+		start_time = time.time()
 		self.inFiles = []
 		for i in range( len( self.atoms ) ) :
 			N = self.atoms[ i ]
@@ -53,50 +55,49 @@ class Turing( Daemon ) :
 					#print "N = %s , M = %s , FILE = %s" % ( N , M , infile )
 		files = self.inFiles
 		self.process = []
-		while len( files ) > 0 :
+		while len( files ) > 0 or len( self.process ) > 0 :
 			for f in files :
 				if len( self.process ) >= Turing.config[ 'max_process' ] : continue
+				files.remove( f )
+				if os.path.isfile( f[ 'infile' ] ) : continue
 				params = Turing.config[ 'call_generator' ].split()
 				params.append( str( f[ 'N' ] ) )
 				params.append( str( f[ 'M' ] ) )
 				params.append( str( f[ 'K' ] ) )
 				params.append( f[ 'infile' ] )
 				self.process.append( Popen( params ) )
-				files.remove( f )
 				
 			for proc in self.process :
 				retcode = proc.poll()
 				if retcode is not None :
 					self.process.remove( proc )
+		print "T. de generacion: %s segundos" % ( time.time() - start_time )
 	
 	def processInFiles( self ) :
-		# TODO: Agregar timer de duracion de procesado de datos
+		start_time = time.time()
 		self.process = []
-		while len( self.inFiles ) > 0 :
+		while len( self.inFiles ) > 0 or len( self.process ) > 0 :
 			for f in self.inFiles :
 				if len( self.process ) >= Turing.config[ 'max_process' ] : continue
 				params = Turing.config[ 'call_maxsatsolver' ].split()
-				# TODO: agregar llamada a proceso
+				params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
+				params.append( f[ 'infile' ] )
+				outname = f[ 'infile' ].replace( 'in' , 'out' ).replace( 'wcnf' , 'txt' )
 				self.inFiles.remove( f )
+				if os.path.isfile( outname ) : continue
+				outfile = open( outname , 'w' )
+				self.process.append( Popen( params , stdout = outfile ) )
 
 			for proc in self.process :
 				retcode = proc.poll()
 				if retcode is not None :
 					self.process.remove( proc )
+			print "T. de maxsatsolver: %s segundos" % ( time.time() - start_time )
 
 	def run( self ) :
 		self.initialize()
-		#self.generateInFiles()
+		self.generateInFiles()
 		self.processInFiles()
-		#while True :
-			#files = self.inFiles
-			#for f in files :
-				#if( len( self.process ) >= Turing.config[ 'max_process' ] ) : continue
-				#params = etapa[ 'nombreproceso' ].split()
-				#params.append( f[ 'nombrearchivo' ] )
-				#self.data.append( { 'archivo': f , 'etapa' : etapa } )
-				#self.process.append( Popen( params ) )
-
 
 if __name__ == "__main__" :
 	turing = Turing( 'b.pid' )
