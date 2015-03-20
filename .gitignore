@@ -1,6 +1,8 @@
 data/
 samples/
 **/.DS_Store
+*.pid
+*.pyc
 data/max2sat_100at/in/*
 data/max2sat_100at/out/*
 data/max3sat_100at/in/*

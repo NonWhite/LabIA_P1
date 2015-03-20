@@ -11,7 +11,9 @@ from daemon import Daemon
 class Turing( Daemon ) :
 	# Parametros de configuracion generales del demonio
 	config = {
-		'max_process': 50 ,
+		'max_process_in': 50 ,
+		'max_process_out': 10 ,
+		'location' : os.environ[ 'P1_HOME' ] ,
 		'dirs': [ 'data/max3sat_100at/' ] * 80 ,
 		'num_literals' : 3 ,
 		'atoms' : [ 100 ] ,
@@ -52,12 +54,11 @@ class Turing( Daemon ) :
 					m = ( "00%s" % M if M < 10 else ( "0%s" % M if M < 100 else "%s" % M ) )
 					infile = direc + "in/%scl_%s.wcnf" % ( m , num )
 					self.inFiles.append( { 'infile': infile , 'N': N , 'M': M , 'K': self.K } )
-					#print "N = %s , M = %s , FILE = %s" % ( N , M , infile )
-		files = self.inFiles
+		files = list( self.inFiles )
 		self.process = []
 		while len( files ) > 0 or len( self.process ) > 0 :
 			for f in files :
-				if len( self.process ) >= Turing.config[ 'max_process' ] : continue
+				if len( self.process ) >= Turing.config[ 'max_process_in' ] : continue
 				files.remove( f )
 				if os.path.isfile( f[ 'infile' ] ) : continue
 				params = Turing.config[ 'call_generator' ].split()
@@ -72,17 +73,19 @@ class Turing( Daemon ) :
 				if retcode is not None :
 					self.process.remove( proc )
 		print "T. de generacion: %s segundos" % ( time.time() - start_time )
+		time.sleep( 5 )
 	
 	def processInFiles( self ) :
 		start_time = time.time()
 		self.process = []
+		home = Turing.config[ 'location' ]
 		while len( self.inFiles ) > 0 or len( self.process ) > 0 :
 			for f in self.inFiles :
-				if len( self.process ) >= Turing.config[ 'max_process' ] : continue
+				if len( self.process ) >= Turing.config[ 'max_process_out' ] : continue
 				params = Turing.config[ 'call_maxsatsolver' ].split()
 				params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
-				params.append( f[ 'infile' ] )
-				outname = f[ 'infile' ].replace( 'in' , 'out' ).replace( 'wcnf' , 'txt' )
+				params.append( home + "/" + f[ 'infile' ] )
+				outname = home + "/" + f[ 'infile' ].replace( 'in' , 'out' ).replace( 'wcnf' , 'txt' )
 				self.inFiles.remove( f )
 				if os.path.isfile( outname ) : continue
 				outfile = open( outname , 'w' )
@@ -92,7 +95,7 @@ class Turing( Daemon ) :
 				retcode = proc.poll()
 				if retcode is not None :
 					self.process.remove( proc )
-			print "T. de maxsatsolver: %s segundos" % ( time.time() - start_time )
+		print "T. de maxsatsolver: %s segundos" % ( time.time() - start_time )
 
 	def run( self ) :
 		self.initialize()
