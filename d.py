@@ -18,7 +18,7 @@ class Turing( Daemon ) :
 		'num_literals' : 3 ,
 		'atoms' : utils.frange( 100 , 1000 , 100 ) ,
 		'rel_mn' : [ 1.0 , 3.0 , 4.3 , 6.0 , 8.0 ] ,
-		'files_per_conf' : 100 ,
+		'files_per_conf' : 20 ,
 		'call_generator' : 'python generator/generator.py' ,
 		'call_maxsatsolver' : 'sh maxsatsolver.sh' ,
 		'maxsatsolver_timeout' : 1800
@@ -95,7 +95,7 @@ class Turing( Daemon ) :
 		self.processInFiles()
 
 if __name__ == "__main__" :
-	turing = Turing( 'b.pid' )
+	turing = Turing( 'd.pid' )
 	if( len( sys.argv ) == 2 ) :
 		if( sys.argv[ 1 ] == 'start' ) : turing.start()
 		elif( sys.argv[ 1 ] == 'stop' ) : turing.stop()

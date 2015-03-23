@@ -95,7 +95,7 @@ class Turing( Daemon ) :
 		self.processInFiles()
 
 if __name__ == "__main__" :
-	turing = Turing( 'b.pid' )
+	turing = Turing( 'c.pid' )
 	if( len( sys.argv ) == 2 ) :
 		if( sys.argv[ 1 ] == 'start' ) : turing.start()
 		elif( sys.argv[ 1 ] == 'stop' ) : turing.stop()
