@@ -18,10 +18,10 @@ class Turing( Daemon ) :
 		'num_literals' : 3 ,
 		'atoms' : utils.frange( 100 , 1000 , 100 ) ,
 		'rel_mn' : [ 1.0 , 3.0 , 4.3 , 6.0 , 8.0 ] ,
-		'files_per_conf' : 20 ,
+		'files_per_conf' : 5 ,
 		'call_generator' : 'python generator/generator.py' ,
 		'call_maxsatsolver' : 'sh maxsatsolver.sh' ,
-		'maxsatsolver_timeout' : 1800
+		'maxsatsolver_timeout' : 3600
 	}
 	
 	def initialize( self ) :
@@ -75,7 +75,7 @@ class Turing( Daemon ) :
 			for f in self.inFiles :
 				if len( self.process ) >= Turing.config[ 'max_process_out' ] : continue
 				params = Turing.config[ 'call_maxsatsolver' ].split()
-				params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
+				#params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
 				params.append( home + "/" + f[ 'infile' ] )
 				outname = home + "/" + f[ 'infile' ].replace( 'in' , 'out' ).replace( 'wcnf' , 'txt' )
 				self.inFiles.remove( f )
