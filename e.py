@@ -18,10 +18,10 @@ class Turing( Daemon ) :
 		'num_literals' : 2 ,
 		'atoms' : utils.frange( 100 , 1000 , 100 ) ,
 		'rel_mn' : [ 1.0 , 3.0 , 4.3 , 6.0 , 8.0 ] ,
-		'files_per_conf' : 100 ,
+		'files_per_conf' : 2 ,
 		'call_generator' : 'python generator/generator.py' ,
 		'call_maxsatsolver' : 'sh maxsatsolver.sh' ,
-		'maxsatsolver_timeout' : 1800
+		'maxsatsolver_timeout' : 3600
 	}
 	
 	def initialize( self ) :
@@ -37,13 +37,13 @@ class Turing( Daemon ) :
 		self.inFiles = []
 		for i in range( len( self.atoms ) ) :
 			N = int( self.atoms[ i ] )
-			n = ( "000%s" % N if N < 10 else ( "00%s" % N if N < 100 else ( "0%s" % N if N < 1000 else "%s" % N ) ) )
+			n = ( '%s' % N ).zfill( 4 )
 			for j in range( len( self.clauses_rel ) ) :
 				rel = self.clauses_rel[ j ]
 				M = int( N * rel )
 				direc = self.dirs[ j ]
 				for it in range( 1 , self.iters + 1 ) :
-					num = ( "00%s" % it if it < 10 else ( "0%s" % it if it < 100 else "%s" % it ) )
+					num = ( '%s' % it ).zfill( 3 )
 					infile = direc + "in/%sat_%s.wcnf" % ( n , num )
 					self.inFiles.append( { 'infile': infile , 'N': N , 'M': M , 'K': self.K } )
 		files = list( self.inFiles )

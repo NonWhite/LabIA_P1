@@ -9,17 +9,35 @@ class Turing( Daemon ) :
 	config = {
 		'location' : os.environ[ 'P1_HOME' ] + '/data' ,
 		'subdirs' : [ 'out' ] ,
-		'filters' : [ 'TIMEOUT' ]
+		'good_filters' : [ 'UNSATIS' , 'OPTIMUM' ] , # At least one of this
+		'bad_filters' : [ 'TIMEOUT' ] # No one of this
 	}
 	
 	def initialize( self ) :
 		return 'init'
 
+	def isOk( self , path ) :
+		have_bad = have_good = False
+		good_f = Turing.config[ 'good_filters' ]
+		bad_f = Turing.config[ 'bad_filters' ]
+		with open( path ) as f :
+			for line in f :
+				if have_bad : break
+				if have_good : break
+				for filt in bad_f :
+					if line.find( filt ) < 0 : continue
+					have_bad = True
+					break
+				for filt in good_f :
+					if line.find( filt ) < 0 : continue
+					have_good = True
+					break
+		return have_good and not have_bad
+
 	def filterFiles( self ) :
 		start_time = time.time()
 		home = Turing.config[ 'location' ]
 		dirs = os.walk( home ).next()[ 1 ]
-		filters = Turing.config[ 'filters' ]
 		contador = 0
 		for d in dirs :
 			dpath = home + '/' + d
@@ -31,9 +49,7 @@ class Turing( Daemon ) :
 				files = os.walk( spath ).next()[ 2 ]
 				for f in files :
 					fpath = spath + '/' + f
-					test = open( fpath ).read()
-					for filt in filters :
-						if test.find( filt ) < 0 : continue
+					if not self.isOk( fpath ) :
 						print "Eliminando %s" % fpath
 						os.remove( fpath )
 						contador += 1
