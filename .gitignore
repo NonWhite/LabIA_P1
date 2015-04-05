@@ -11,3 +11,5 @@ solvers/toysolver/
 solvers/CCLS_to_akmaxsat_binaries/
 solvers/qmaxsat/
 solvers/Dist2014/
+relatorio/*.aux
+relatorio/*.log

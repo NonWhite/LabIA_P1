@@ -81,13 +81,14 @@ class Turing( Daemon ) :
 				self.inFiles.remove( f )
 				if os.path.isfile( outname ) : continue
 				outfile = open( outname , 'w' )
+				print "Processing %s" % outname
 				self.process.append( Popen( params , stdout = outfile ) )
 
 			for proc in self.process :
 				retcode = proc.poll()
 				if retcode is not None :
 					self.process.remove( proc )
-		print "T. de maxsatsolver: %s segundos" % ( time.time() - start_time )
+		print "T. maxsatsolver: %s segundos" % ( time.time() - start_time )
 
 	def run( self ) :
 		self.initialize()

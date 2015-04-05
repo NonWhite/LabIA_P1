@@ -75,7 +75,7 @@ class Turing( Daemon ) :
 			for f in self.inFiles :
 				if len( self.process ) >= Turing.config[ 'max_process_out' ] : continue
 				params = Turing.config[ 'call_maxsatsolver' ].split()
-				params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
+				#params.append( '--timeout=%s' % Turing.config[ 'maxsatsolver_timeout' ] )
 				params.append( home + "/" + f[ 'infile' ] )
 				outname = home + "/" + f[ 'infile' ].replace( 'in' , 'out' ).replace( 'wcnf' , 'txt' )
 				self.inFiles.remove( f )

@@ -1,0 +1,26 @@
+\section{Problema} 
+
+\subsection{Definições previas}
+% TODO: Colocar la diapo del profe como referencia en las definiciones
+% TODO: Buscar referencias que no sean solo las diapositivas
+	Para entender o problema, é necessário primero definir algumas coisas como:
+	\begin{description}
+		\item[Átomo] Variável lógica, ou seja que só pode ter como possíveis valores a Verdadeiro e Falso. O número total de átomos para este trabalho será representado com $N$.
+		\item[Cláusula] Conjunto de átomos numa disjunção. São da seguinte forma: $x_1 \lor x_2 \lor \ldots \lor x_K$, onde $K$ é o tamanho da cláusula. O número total de cláusulas para este trabalho será representado com $M$.
+		\item[Satisfiability] Um átomo $p$ é satisfasível se $v( p ) = 1$ (verdadeiro). Uma cláusula só vai ser satisfasível se pelo menos menos um de seus átomos é satisfasível.
+	\end{description}
+
+\subsection{SAT: Satisfiability problem}
+	Dado um conjunto de cláusulas ($M$ cláusulas), determinar se existe uma valoração dos átomos que faça possível que a conjunção de todas as cláusulas, ou seja $C_1 \land C_2 \land \ldots C_M$, seja verdadeiro.
+
+\subsection{Max-SAT: Maximum Satisfiability problem}
+	Dado um conjunto de cláusulas, determinar o conjunto de tamanho máximo (maior número de cláusulas) que seja satisfasível com alguma valoração dos átomos \cite{LabIA15}.
+
+\subsection{Partial Max-SAT}
+	Neste problema é um caso especial de Max-SAT onde temos um conjunto de cláusulas que é obrigatório conhecidas como \textbf{cláusulas hard} e os outras cláusulas como \textbf{cláusulas soft}. Da mesma forma que o anterior problema, tem que determina-se o conjunto de tamanho máximo tendo em consideração o conjunto de cláusulas hard.
+
+\subsection{Weighted Max-SAT}
+	Neste caso especial de Max-SAT cada cláusula tem um peso $w_i$ e deve determina-se o conjunto de peso máximo que pode ser satisfasível com alguma valoração dos atomos.
+
+\subsection{Partial Weighted Max-SAT}
+	É uma combinação dos dois problemas anteriores onde cada cláusula tem um peso e também se tem um conjunto de cláusulas hard (com peso máximo) que são obrigatórias e um conjunto de cláusulas soft. Se deve determinar o conjunto de peso máximo tendo en consideração as cláusulas hard \cite{LabIA15}. Este é o problema com o que se vai experimentar neste trabalho.

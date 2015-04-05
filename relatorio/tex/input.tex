@@ -1,0 +1,43 @@
+\section{Dados de entrada}
+\textbf{Implementar um gerador aleatório de problemas no formato padrão cnf, com $N$ átomos e $M$ cláusulas, e as cláusulas todas possuem $K$-literais, com pesos entre 1 e o número total de cláusulas $M$. $K$, $N$ e $M$ são parâmetros a serem passados ao gerador. Esta implementação pode ser feita em qualquer linguagem de programação para rodar em qualquer sistema operacional. Não entregue a implementacão, apenas descreva seus pontos mais importantes, por exemplo, como lida com repetição de literais e cláusulas.}
+
+\subsection{Restrições}
+\label{subsec:restricoes}
+	No archivo de regras dado em ~\cite{ConferenceRules14} se explica o padrão wcnf da seguinte forma: \\
+		c \\		c Comments \\		c \\		p wcnf $N$ $M$ $W_{max}$ \\
+		$w_1$ $a_1$ $a_2$ \ldots $a_K$ \\		$w_2$ $b_1$ $b_2$ \ldots $b_K$ \\		. \\		. \\		. \\		$w_M$ $z_1$ $z_2$ \ldots $z_K$ \\
+	Las linhas que começam com $c$ são tomadas como comentarios e não adicionam informação numérica para a resolução do problema. A seguinte linha contem os valores de $N$ (número de átomos), $M$ (número de cláusulas) e $W_{max}$ que é o máximo peso das cláusulas, que vai ser também o peso das cláusulas hard. Por útlimo tem $M$ linhas descrevendo cada cláusula, primeiro tem seu peso e logo seus respetivos literais (numerados de 1 a $N$). Em caso seja necessário colocar alguma negação tão só tem que colocá-se o número negativo do identificador do átomo (ou seja, de -1 a -$N$). Além, cada cláusula vai ter o mesmo número de literais $K$ em cada geração de dados. Em quanto as restrições numéricas temos:
+	\begin{itemize}
+		\item Os pesos das cláusulas tem que ser maiores ou iguais a 1
+		\item A suma dos pesos das cláusulas soft tem que ser menor a $2^{63}$
+		\item Cláusulas hard tem peso $W_{max}$ e cláusulas soft peso menor a $W_{max}$
+		\item $W_{max}$ sempre é maior que a suma dos pesos das cláusulas soft
+	\end{itemize}
+	
+\subsection{Gerador aleatório de dados}
+	O gerador de dados está escrito na linguagem de programação Python e recebe 4 parâmetros: $N$, $M$, $K$ e o nome para o archivo gerado. Ao momento de fazer que os dados sejam gerados totalmente aleatórios surgem dois problemas e se tem que garantir que:	\begin{enumerate}
+		\item Literais numa mesma cláusula tem que ser diferentes, ou seja uma cláusula $C$ não deve ser da seguinte forma: $a \lor b \lor \ldots b \lor \ldots z$
+		\item Não devem existir cláusulas iguais (considerando só seus literais e não seu peso)
+		\item Deve gerar cláusulas hard e cláusulas soft
+	\end{enumerate}
+	A função principal que satisfaz ambas condições é a seguinte:
+	\begin{lstlisting}		def generateClause( self ) :			clause = []			ishard = randint( 0 , 1 )
+			weight = ( self.M * self.M if ishard == 1 else randint( 1 , self.M ) )
+			self.top = max( self.top , weight )			while True :				clause = []				currentLiterals = {}				for p in range( self.K ) :					while True :						sign = randint( 0 , 1 )						atom = randint( 1 , self.N )
+						atom = ( 1 if sign == 0 else -1 ) * atom
+						if atom in currentLiterals : continue |\label{line:literals}|
+						else : break					currentLiterals [ atom ] = True
+					clause . append( atom )
+				if self . hashcode( clause ) in self . currentClauses : continue |\label{line:clauses}|
+				else : break
+			self .addClause( clause )
+			clause . insert ( 0 , weight )
+			return clause
+	\end{lstlisting}
+	Para satisfazer a primeira condição, o gerador tem um dicionário ${currentLiterals}$ que armazena os literais que existem nessa cláusula até esse momento. De esta forma, na linha ~\ref{line:literals} verifica se o novo literal gerado já existe nesse dicionário e o armazena se não existe, caso contrario gera outro literal. Da mesma forma para satisfazer a segunda condição, o gerador tem um dicionário ${currentClauses}$ que armazena os valores hash das cláusulas geradas até esse momento, e na linha ~\ref{line:clauses} verifica se a novo valor já existe ou não. Mas o principal problema com a verificação de existência das cláusulas geradas é que depende $K$ e $M$, então para reduzir o tempo de execução neste passo, cada cláusula foi convertida a seu valor hash. Para esto se tem os seguintes parâmetros:	\begin{itemize}
+		\item Aos literais na cláusula foi adicionado $N$ para fazer positivos aqueles com valores negativos
+		\item A base para o valor hash é $B = 2N$ porque se está adicionando $N$ a cada literal
+		\item Para evitar transbordamento nos tipos de dados cada valor hash foi calculado módulo 1000000007 ($10^9 + 7$)
+		\item O valor hash para uma cláusula $C$ será da seguinte forma: ${hash}( C ) = ( a_1 * B^{K-1} + a_2 * B^{K-2} + \ldots + a_K * B^0 ) \mod 1000000007$
+	\end{itemize}
+	Fazendo essa conversão às cláusulas o tempo de execução já não depende de $K$ porque somente estão sendo comparados números. Por último, para satisfazer a terceira condição, é gerado aleatoriamente um valor 0 ou 1 que diz se uma cláusula vai ser hard ou não (soft em caso seja 0, hard em caso seja 1). Além, tendo em conta as restricões em ~\ref{subsec:restricoes}, as cláusulas soft têm peso entre 1 e $M$, mas as cláusulas hard têm peso $M^2$ porque o peso de um cláusula hard sempre deve ter um valor maior que a suma das cláusulas soft que como máximo poderiam ser $M - 1$ cláusulas.
