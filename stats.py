@@ -34,6 +34,32 @@ class Turing( Daemon ) :
 		if data[ 'status' ][ 0 ] != 'U' and  data[ 'status' ][ 0 ] != 'O' : print data # only for verification
 		return data
 
+	def saveStats( self , path , stats ) :
+		f = open( path + '/stats.txt' , 'w' )
+		staticIdField = ( 1 if path.find( 'mn' ) < 0 else 0 )
+		staticField = [ "Atoms" , "Clauses" ]
+		lst_stats = []
+		for key in stats :
+			lst = stats[ key ]
+			countFiles = 0.0
+			totalFiles = ( 100.0 if staticIdField == 1 else 10.0 )
+			optimumFiles = 0.0
+			totalTime = 0.0
+			for prop in lst :
+				if prop[ 'status' ].find( 'OPTIMUM' ) >= 0 : optimumFiles += 1
+				countFiles += 1
+				totalTime += float( prop[ 'time' ][ :-1 ] )
+			# ( clauses or atoms , opt_files , total_files , percentage , time )
+			lst_stats.append( ( int( key[ staticIdField ] ) , optimumFiles , totalFiles , 100.0 * ( optimumFiles / totalFiles ) , ( totalTime / countFiles ) ) )
+		lst_stats = sorted( lst_stats , key = lambda st : st[ 0 ] )
+		for x in lst_stats :
+			f.write( "%s: %s\n" % ( staticField[ staticIdField ] , x[ 0 ] ) )
+			f.write( "Optimum: %s\n" % x[ 1 ] )
+			f.write( "Total: %s\n" % x[ 2 ] )
+			f.write( "Percentage: %s\n" % x[ 3 ] )
+			f.write( "Time: %s\n" % x[ 4 ] )
+			f.write( "\n" )
+
 	def filterFiles( self ) :
 		start_time = time.time()
 		home = Turing.config[ 'location' ]
@@ -52,12 +78,14 @@ class Turing( Daemon ) :
 					data = self.extractDataFromFile( fpath )
 					key = ( data[ 'atoms' ] , data[ 'clauses' ] )
 					if not key in stats : stats[ key ] = []
-					data.pop( 'atoms' , None )
-					data.pop( 'clauses' , None )
+					#data.pop( 'atoms' , None )
+					#data.pop( 'clauses' , None )
+					#print data
 					stats[ key ].append( data )
 					# TODO: Create a file with stats per key
 					contador += 1
 				print "Cant. archivos en %s: %s" % ( spath , contador )
+			self.saveStats( dpath , stats )
 		print "T. de stats: %s segundos" % ( time.time() - start_time )
 		#print "%s archivos eliminados" % contador
 

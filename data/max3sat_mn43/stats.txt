@@ -1,0 +1,60 @@
+Atoms: 100
+Optimum: 91.0
+Total: 100.0
+Percentage: 91.0
+Time: 10.278274725275
+
+Atoms: 200
+Optimum: 60.0
+Total: 100.0
+Percentage: 60.0
+Time: 58.7358166667
+
+Atoms: 300
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 116.0305
+
+Atoms: 400
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 230.58
+
+Atoms: 500
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 512.05
+
+Atoms: 600
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 741.912
+
+Atoms: 700
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 998.048
+
+Atoms: 800
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 1806.5
+
+Atoms: 900
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 2501.1
+
+Atoms: 1000
+Optimum: 6.0
+Total: 10.0
+Percentage: 60.0
+Time: 4700.17
+

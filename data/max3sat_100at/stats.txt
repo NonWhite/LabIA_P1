@@ -1,0 +1,360 @@
+Clauses: 10
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04299
+
+Clauses: 20
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.03932
+
+Clauses: 30
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04626
+
+Clauses: 40
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04144
+
+Clauses: 50
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.0402
+
+Clauses: 60
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04
+
+Clauses: 70
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04061
+
+Clauses: 80
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04092
+
+Clauses: 90
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04115
+
+Clauses: 100
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04144
+
+Clauses: 110
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04103
+
+Clauses: 120
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04137
+
+Clauses: 130
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.042
+
+Clauses: 140
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04255
+
+Clauses: 150
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.0431
+
+Clauses: 160
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04832
+
+Clauses: 170
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05053
+
+Clauses: 180
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04508
+
+Clauses: 190
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.0432
+
+Clauses: 200
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04378
+
+Clauses: 210
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04456
+
+Clauses: 220
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04384
+
+Clauses: 229
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04461
+
+Clauses: 240
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04474
+
+Clauses: 250
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.0479
+
+Clauses: 260
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04757
+
+Clauses: 270
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04812
+
+Clauses: 280
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05086
+
+Clauses: 290
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05003
+
+Clauses: 300
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04773
+
+Clauses: 310
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04749
+
+Clauses: 320
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.04815
+
+Clauses: 330
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05004
+
+Clauses: 340
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05493
+
+Clauses: 350
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.0907
+
+Clauses: 360
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.08614
+
+Clauses: 370
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.05714
+
+Clauses: 380
+Optimum: 100.0
+Total: 100.0
+Percentage: 100.0
+Time: 0.06186
+
+Clauses: 390
+Optimum: 99.0
+Total: 100.0
+Percentage: 99.0
+Time: 0.0718585858586
+
+Clauses: 400
+Optimum: 97.0
+Total: 100.0
+Percentage: 97.0
+Time: 0.144515463918
+
+Clauses: 409
+Optimum: 93.0
+Total: 100.0
+Percentage: 93.0
+Time: 0.205311827957
+
+Clauses: 420
+Optimum: 89.0
+Total: 100.0
+Percentage: 89.0
+Time: 0.469269662921
+
+Clauses: 430
+Optimum: 84.0
+Total: 100.0
+Percentage: 84.0
+Time: 0.513404761905
+
+Clauses: 440
+Optimum: 75.0
+Total: 100.0
+Percentage: 75.0
+Time: 2.40676
+
+Clauses: 450
+Optimum: 80.0
+Total: 100.0
+Percentage: 80.0
+Time: 3.17195
+
+Clauses: 459
+Optimum: 85.0
+Total: 100.0
+Percentage: 85.0
+Time: 11.5535411765
+
+Clauses: 470
+Optimum: 86.0
+Total: 100.0
+Percentage: 86.0
+Time: 16.6350232558
+
+Clauses: 480
+Optimum: 85.0
+Total: 100.0
+Percentage: 85.0
+Time: 28.1881529412
+
+Clauses: 490
+Optimum: 85.0
+Total: 100.0
+Percentage: 85.0
+Time: 31.5179764706
+
+Clauses: 500
+Optimum: 84.0
+Total: 100.0
+Percentage: 84.0
+Time: 56.7514404762
+
+Clauses: 509
+Optimum: 38.0
+Total: 100.0
+Percentage: 38.0
+Time: 80.5282368421
+
+Clauses: 520
+Optimum: 50.0
+Total: 100.0
+Percentage: 50.0
+Time: 140.5282368421
+
+Clauses: 530
+Optimum: 60.0
+Total: 100.0
+Percentage: 60.0
+Time: 150.5282368421
+
+Clauses: 540
+Optimum: 54.0
+Total: 100.0
+Percentage: 54.0
+Time: 220.5282368421
+
+Clauses: 550
+Optimum: 33.0
+Total: 100.0
+Percentage: 33.0
+Time: 239.5282368421
+
+Clauses: 560
+Optimum: 42.0
+Total: 100.0
+Percentage: 42.0
+Time: 284.5282368421
+
+Clauses: 570
+Optimum: 38.0
+Total: 100.0
+Percentage: 38.0
+Time: 319.5282368421
+
+Clauses: 580
+Optimum: 31.0
+Total: 100.0
+Percentage: 31.0
+Time: 399.5282368421
+
+Clauses: 590
+Optimum: 35.0
+Total: 100.0
+Percentage: 35.0
+Time: 441.5282368421
+
+Clauses: 600
+Optimum: 24.0
+Total: 100.0
+Percentage: 24.0
+Time: 520.5282368421
+

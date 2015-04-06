@@ -1,0 +1,35 @@
+Atoms: 100
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 6327.57363636
+
+Atoms: 200
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 7732.36
+
+Atoms: 300
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 15253.93
+
+Atoms: 400
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 40823.234
+
+Atoms: 500
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 91834.45
+
+Atoms: 600
+Optimum: 11.0
+Total: 20.0
+Percentage: 55.0
+Time: 131082.85
