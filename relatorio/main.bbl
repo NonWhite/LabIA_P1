@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{MaxSAT14}
+{17th International Conference on Theory and Applications of Satisfiability
+  Testing}.
+\newblock {Ninth Max-SAT Evaluation}, 2014.
+
+\bibitem{ConferenceRules14}
+{17th International Conference on Theory and Applications of Satisfiability
+  Testing}.
+\newblock {Ninth Max-SAT Evaluation}, 2014.
+
+\bibitem{LabIA15}
+{Marcelo Finger}.
+\newblock {Satisfiability and SAT and MaxSAT Solver}, 2015.
+
+\bibitem{ToySAT14}
+{Masahiro Sakai}.
+\newblock {Toysolver}, 2014.
+
+\bibitem{Satisfiability09}
+{Victor W. Marek}.
+\newblock {\em {Introduction to Mathematics of Satisfiability}}.
+\newblock 2009.
+
+\end{thebibliography}

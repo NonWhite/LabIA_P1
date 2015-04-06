@@ -1,17 +1,15 @@
 \section{Problema} 
 
 \subsection{Definições previas}
-% TODO: Colocar la diapo del profe como referencia en las definiciones
-% TODO: Buscar referencias que no sean solo las diapositivas
 	Para entender o problema, é necessário primero definir algumas coisas como:
 	\begin{description}
 		\item[Átomo] Variável lógica, ou seja que só pode ter como possíveis valores a Verdadeiro e Falso. O número total de átomos para este trabalho será representado com $N$.
 		\item[Cláusula] Conjunto de átomos numa disjunção. São da seguinte forma: $x_1 \lor x_2 \lor \ldots \lor x_K$, onde $K$ é o tamanho da cláusula. O número total de cláusulas para este trabalho será representado com $M$.
-		\item[Satisfiability] Um átomo $p$ é satisfasível se $v( p ) = 1$ (verdadeiro). Uma cláusula só vai ser satisfasível se pelo menos menos um de seus átomos é satisfasível.
+		\item[Satisfiability] Um átomo $p$ é satisfasível se $v( p ) = 1$ (verdadeiro). Uma cláusula só vai ser satisfasível se pelo menos menos um de seus átomos é satisfasível \cite{Satisfiability09}.
 	\end{description}
 
 \subsection{SAT: Satisfiability problem}
-	Dado um conjunto de cláusulas ($M$ cláusulas), determinar se existe uma valoração dos átomos que faça possível que a conjunção de todas as cláusulas, ou seja $C_1 \land C_2 \land \ldots C_M$, seja verdadeiro.
+	Dado um conjunto de cláusulas ($M$ cláusulas), determinar se existe uma valoração dos átomos que faça possível que a conjunção de todas as cláusulas, ou seja $C_1 \land C_2 \land \ldots C_M$, seja verdadeiro \cite{LabIA15}.
 
 \subsection{Max-SAT: Maximum Satisfiability problem}
 	Dado um conjunto de cláusulas, determinar o conjunto de tamanho máximo (maior número de cláusulas) que seja satisfasível com alguma valoração dos átomos \cite{LabIA15}.
